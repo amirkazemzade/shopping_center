@@ -1,0 +1,34 @@
+package me.amirkzm.shoppingcenter.product.productitem
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
+
+/**
+ * Screen's coordinator which is responsible for handling actions from the UI layer
+ * and one-shot actions based on the new UI state
+ */
+class ProductItemCoordinator(
+    val viewModel: ProductItemViewModel,
+) {
+    val screenStateFlow = viewModel.stateFlow
+    fun handle(action: ProductItemAction) {
+        when (action) {
+            ProductItemAction.OnClick -> { /* Handle action */
+            }
+        }
+    }
+
+
+}
+
+@Composable
+fun rememberProductItemCoordinator(
+    viewModel: ProductItemViewModel = hiltViewModel(),
+): ProductItemCoordinator {
+    return remember(viewModel) {
+        ProductItemCoordinator(
+            viewModel = viewModel
+        )
+    }
+}
