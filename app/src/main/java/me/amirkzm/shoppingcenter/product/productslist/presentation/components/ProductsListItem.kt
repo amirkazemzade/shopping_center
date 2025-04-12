@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
@@ -47,13 +48,16 @@ fun ProductsListItem(
                     failure = placeholder(resourceId = R.drawable.shopping_basket),
                 )
             }
-            Heights.ExtraSmall(modifier = Modifier.weight(1f))
+            Heights.ExtraSmall()
             Column(
                 modifier = Modifier.padding(4.dp)
             ) {
                 Text(
                     text = productItem.title,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    minLines = 3,
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = "${productItem.price} $",

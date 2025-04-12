@@ -1,12 +1,13 @@
 package me.amirkzm.shoppingcenter.product.productslist.presentation.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,30 +25,28 @@ fun ProductsListView(
     productsList: ProductsListModel,
     modifier: Modifier = Modifier,
 ) {
-    BoxWithConstraints {
-        LazyColumn(
-            contentPadding = PaddingValues(vertical = 16.dp),
-            modifier = modifier,
+    BoxWithConstraints(
+        modifier = modifier
+    ) {
+        val effectiveItemSize = 200.dp
+        val numberOfColumns =
+            max(1, (this@BoxWithConstraints.maxWidth / effectiveItemSize).toInt())
+        ceil(productsList.size.toDouble() / numberOfColumns).toInt()
+
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(effectiveItemSize),
+            verticalArrangement = Arrangement.Center
         ) {
-            val effectiveItemSize = 200.dp
-            val numberOfColumns =
-                max(1, (this@BoxWithConstraints.maxWidth / effectiveItemSize).toInt())
-            val numberOfRows = ceil(productsList.size.toDouble() / numberOfColumns).toInt()
             items(
-                count = numberOfRows
-            ) { rowIndex ->
-                Row {
-                    repeat(numberOfColumns) { columnIndex ->
-                        val itemIndex = (rowIndex * numberOfColumns) + columnIndex
-                        if (itemIndex >= productsList.size) return@repeat
-                        ProductsListItem(
-                            productItem = productsList[itemIndex],
-                            modifier = Modifier
-                                .fillMaxWidth(1.0f / (numberOfColumns - columnIndex))
-                                .padding(8.dp)
-                        )
-                    }
-                }
+                items = productsList,
+            ) {
+                ProductsListItem(
+                    productItem = it,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                )
+
             }
         }
     }
