@@ -2,12 +2,9 @@ package me.amirkzm.shoppingcenter.product.productslist.presentation.components
 
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Surface
@@ -19,6 +16,7 @@ import me.amirkzm.shoppingcenter.product.common.domain.models.ProductItemModel
 import me.amirkzm.shoppingcenter.product.common.domain.models.ProductsListModel
 import me.amirkzm.shoppingcenter.product.common.domain.models.Rating
 import kotlin.math.ceil
+import kotlin.math.max
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -31,20 +29,21 @@ fun ProductsListView(
             contentPadding = PaddingValues(vertical = 16.dp),
             modifier = modifier,
         ) {
-            val itemSize = 200.dp
-            val columnCount = (this@BoxWithConstraints.maxWidth / itemSize).toInt()
-            val rowCount = ceil(productsList.size.toDouble() / columnCount).toInt()
+            val effectiveItemSize = 200.dp
+            val numberOfColumns =
+                max(1, (this@BoxWithConstraints.maxWidth / effectiveItemSize).toInt())
+            val numberOfRows = ceil(productsList.size.toDouble() / numberOfColumns).toInt()
             items(
-                count = rowCount
+                count = numberOfRows
             ) { rowIndex ->
-                Row{
-                    repeat(columnCount) { columnIndex ->
-                        val itemIndex = (rowIndex * columnCount) + columnIndex
+                Row {
+                    repeat(numberOfColumns) { columnIndex ->
+                        val itemIndex = (rowIndex * numberOfColumns) + columnIndex
                         if (itemIndex >= productsList.size) return@repeat
                         ProductsListItem(
                             productItem = productsList[itemIndex],
                             modifier = Modifier
-                                .fillMaxWidth(1.0f / (columnCount - columnIndex))
+                                .fillMaxWidth(1.0f / (numberOfColumns - columnIndex))
                                 .padding(8.dp)
                         )
                     }
@@ -129,6 +128,6 @@ private fun PreviewProductsList() {
                 }
             } as ProductsListModel,
         )
-        
+
     }
 }
