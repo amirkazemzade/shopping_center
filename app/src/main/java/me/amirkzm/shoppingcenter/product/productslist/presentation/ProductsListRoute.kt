@@ -7,15 +7,17 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-
-@Destination<RootGraph>(start = true)
+@Destination<RootGraph>(start = true, route = "Products List")
 @Composable
 fun ProductsListRoute(
     navigator: DestinationsNavigator,
-    coordinator: ProductsListCoordinator = rememberProductsListCoordinator(),
+    startingCategory: String? = null,
+    coordinator: ProductsListCoordinator = rememberProductsListCoordinator(startingSelectedCategory = startingCategory),
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
+    val productsState by coordinator.productsStateFlow.collectAsStateWithLifecycle()
+    val categoriesState by coordinator.categoriesStateFlow.collectAsStateWithLifecycle()
+    val selectedCategoryState by coordinator.selectedCategoryStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
     val actionsHandler: (ProductsListAction) -> Unit = { action ->
@@ -24,7 +26,9 @@ fun ProductsListRoute(
 
     // UI Rendering
     ProductsListScreen(
-        state = uiState,
+        productsState = productsState,
+        categoriesState = categoriesState,
+        selectedCategoryState = selectedCategoryState,
         onAction = actionsHandler
     )
 }

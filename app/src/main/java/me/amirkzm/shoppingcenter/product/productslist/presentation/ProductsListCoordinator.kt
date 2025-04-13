@@ -5,6 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.generated.destinations.ProductItemDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import me.amirkzm.shoppingcenter.product.common.domain.models.Category
 
 /**
  * Screen's coordinator which is responsible for handling actions from the UI layer
@@ -13,7 +14,9 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 class ProductsListCoordinator(
     val viewModel: ProductsListViewModel,
 ) {
-    val screenStateFlow = viewModel.stateFlow
+    val productsStateFlow = viewModel.stateFlow
+    val categoriesStateFlow = viewModel.categoriesFlow
+    val selectedCategoryStateFlow = viewModel.selectedCategory
     fun handle(action: ProductsListAction, navigator: DestinationsNavigator) {
         when (action) {
             ProductsListAction.FetchProductsList ->
@@ -22,13 +25,20 @@ class ProductsListCoordinator(
             is ProductsListAction.OnProductItemClick -> {
                 navigator.navigate(ProductItemDestination(productId = action.productId))
             }
+
+            ProductsListAction.FetchCategories -> viewModel.getCategories()
+
+            is ProductsListAction.SelectCategory -> viewModel.selectCategory(action.category)
+
+            ProductsListAction.DeselectCategory -> viewModel.deselectCategory()
         }
     }
 }
 
 @Composable
 fun rememberProductsListCoordinator(
-    viewModel: ProductsListViewModel = hiltViewModel(),
+    startingSelectedCategory: Category? = null,
+    viewModel: ProductsListViewModel = createProductsListViewModel(startingSelectedCategory),
 ): ProductsListCoordinator {
     return remember(viewModel) {
         ProductsListCoordinator(
@@ -36,3 +46,9 @@ fun rememberProductsListCoordinator(
         )
     }
 }
+
+@Composable
+private fun createProductsListViewModel(startingSelectedCategory: Category?): ProductsListViewModel =
+    hiltViewModel<ProductsListViewModel, ProductsListViewModel.ProductListViewModelFactory>(
+        creationCallback = { factory -> factory.create(startingSelectedCategory) },
+    )

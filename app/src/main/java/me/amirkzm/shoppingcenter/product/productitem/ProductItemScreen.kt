@@ -40,9 +40,12 @@ fun ProductItemScreen(
             is RequestResource.Success -> ProductItemView(
                 product = state.data,
                 onNavigateBack = { onAction(ProductItemAction.NavigateBack) },
-                onAddToCart = {
-                    // TODO: Add to cart
+                onAddToCart = { product ->
+                    onAction(ProductItemAction.OnClickAddToCart(product = product))
                 },
+                onCategoryClick = { category ->
+                    onAction(ProductItemAction.OnClickCategory(category = category))
+                }
             )
         }
     }

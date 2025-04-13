@@ -17,5 +17,7 @@ typealias ProductItemState = RequestState<ProductItemModel>
 sealed interface ProductItemAction {
     data class FetchProduct(val id: Int) : ProductItemAction
     data object NavigateBack : ProductItemAction
+    data class OnClickCategory(val category: String) : ProductItemAction
+    data class OnClickAddToCart(val product: ProductItemModel) : ProductItemAction
 }
 

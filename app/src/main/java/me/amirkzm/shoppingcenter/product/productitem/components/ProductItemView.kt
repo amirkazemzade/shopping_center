@@ -40,6 +40,7 @@ fun ProductItemView(
     product: ProductItemModel,
     onNavigateBack: () -> Unit,
     onAddToCart: (product: ProductItemModel) -> Unit,
+    onCategoryClick: (category: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -53,7 +54,7 @@ fun ProductItemView(
                         },
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.baseline_arrow_back_24),
+                            painter = painterResource(R.drawable.round_arrow_back_24),
                             contentDescription = "Back to previous screen",
                         )
                     }
@@ -96,7 +97,7 @@ fun ProductItemView(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        painter = painterResource(R.drawable.baseline_star_rate_24),
+                        painter = painterResource(R.drawable.round_star_24),
                         tint = goldYellow,
                         contentDescription = "Star Rating Icon",
                     )
@@ -111,9 +112,7 @@ fun ProductItemView(
                 Heights.Small()
                 ElevatedSuggestionChip(
                     label = { Text(product.category) },
-                    onClick = {
-                        // TODO("Navigate to categoy items list")
-                    },
+                    onClick = { onCategoryClick(product.category) },
                 )
             }
         }
@@ -140,6 +139,7 @@ private fun PreviewProductItemView() {
                 ),
                 onNavigateBack = { },
                 onAddToCart = { },
+                onCategoryClick = { }
             )
         }
     }

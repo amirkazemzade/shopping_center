@@ -3,6 +3,7 @@ package me.amirkzm.shoppingcenter.product.productitem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.ramcosta.composedestinations.generated.destinations.ProductsListDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 /**
@@ -15,11 +16,19 @@ class ProductItemCoordinator(
     val screenStateFlow = viewModel.stateFlow
     fun handle(action: ProductItemAction, navigator: DestinationsNavigator) {
         when (action) {
-            is ProductItemAction.FetchProduct -> {
-                viewModel.fetchProduct(id = action.id)
-            }
+            is ProductItemAction.FetchProduct -> viewModel.fetchProduct(id = action.id)
 
             ProductItemAction.NavigateBack -> navigator.navigateUp()
+
+            is ProductItemAction.OnClickAddToCart -> {
+                // TODO: Add to cart
+            }
+
+            is ProductItemAction.OnClickCategory -> navigator.navigate(
+                ProductsListDestination(
+                    startingCategory = action.category,
+                )
+            )
         }
     }
 

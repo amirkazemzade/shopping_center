@@ -1,12 +1,8 @@
 package me.amirkzm.shoppingcenter.product.productslist.presentation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import me.amirkzm.shoppingcenter.common.domain.models.RequestResource
 import me.amirkzm.shoppingcenter.common.domain.models.RequestState
 import me.amirkzm.shoppingcenter.common.presentation.components.FullScreenErrorMessage
@@ -16,54 +12,55 @@ import me.amirkzm.shoppingcenter.product.productslist.presentation.components.Pr
 
 @Composable
 fun ProductsListScreen(
-    state: ProductsListState,
+    productsState: ProductsListState,
+    categoriesState: CategoriesState,
+    selectedCategoryState: SelectedCategoryState,
     onAction: (ProductsListAction) -> Unit,
 ) {
-    Scaffold {
-        Box(
-            modifier = Modifier.padding(it)
-        ) {
-            LaunchedEffect(state) {
-                if (state is RequestState.Idle) {
-                    onAction(ProductsListAction.FetchProductsList)
-                }
+    Surface {
+        LaunchedEffect(productsState) {
+            if (productsState is RequestState.Idle) {
+                onAction(ProductsListAction.FetchProductsList)
             }
+        }
 
-            when (state) {
-                RequestState.Idle -> FullScreenLoadingIndicator(
-                    message = "Initializing"
-                )
+        LaunchedEffect(categoriesState) {
+            if (categoriesState is RequestState.Idle) {
+                onAction(ProductsListAction.FetchCategories)
+            }
+        }
 
-                RequestState.Loading -> FullScreenLoadingIndicator(
-                    message = "Loading"
-                )
+        when (productsState) {
+            RequestState.Idle -> FullScreenLoadingIndicator(
+                message = "Initializing"
+            )
 
-                is RequestResource.Error -> FullScreenErrorMessage(
-                    message = state.error.message,
-                    onRetry = { onAction(ProductsListAction.FetchProductsList) }
-                )
+            RequestState.Loading -> FullScreenLoadingIndicator(
+                message = "Loading"
+            )
 
-                is RequestResource.Success -> ProductsListView(
-                    productsList = state.data,
-                    onItemClick = { product ->
-                        onAction(
-                            ProductsListAction.OnProductItemClick(
-                                product.id
-                            )
+            is RequestResource.Error -> FullScreenErrorMessage(
+                message = productsState.error.message,
+                onRetry = { onAction(ProductsListAction.FetchProductsList) }
+            )
+
+            // TODO: State handling for categories
+            is RequestResource.Success -> ProductsListView(
+                productsList = productsState.data,
+                categories = if (categoriesState is RequestResource.Success) categoriesState.data else emptyList(),
+                onItemClick = { product ->
+                    onAction(
+                        ProductsListAction.OnProductItemClick(
+                            product.id
                         )
-                    }
-                )
-            }
+                    )
+                },
+                onSelectCategory = { category ->
+                    onAction(ProductsListAction.SelectCategory(category))
+                },
+                onDeselectCategory = { onAction(ProductsListAction.DeselectCategory) },
+                selectedCategory = selectedCategoryState,
+            )
         }
     }
 }
-
-@Composable
-@Preview(name = "ProductsList")
-private fun ProductsListScreenPreview() {
-    ProductsListScreen(
-        state = RequestState.Idle,
-        onAction = {}
-    )
-}
-

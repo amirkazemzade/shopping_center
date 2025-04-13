@@ -4,11 +4,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ProductItemModel(
-    val category: String,
+    val category: Category,
     val description: String,
     val id: Int,
     val image: String,
     val price: Double,
     val rating: Rating,
-    val title: String
+    val title: String,
 )
