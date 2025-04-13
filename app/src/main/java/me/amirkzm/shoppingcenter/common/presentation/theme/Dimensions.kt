@@ -42,6 +42,11 @@ object Heights {
 
 object Widths {
     @Composable
+    fun Smallest(
+        modifier: Modifier = Modifier,
+    ) = Spacer(modifier = modifier.width(4.dp))
+
+    @Composable
     fun ExtraSmall(
         modifier: Modifier = Modifier,
     ) = Spacer(modifier = modifier.width(8.dp))

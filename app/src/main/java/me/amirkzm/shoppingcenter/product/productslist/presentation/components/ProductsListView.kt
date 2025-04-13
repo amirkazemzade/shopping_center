@@ -23,6 +23,7 @@ import kotlin.math.max
 @Composable
 fun ProductsListView(
     productsList: ProductsListModel,
+    onItemClick: (product: ProductItemModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BoxWithConstraints(
@@ -39,9 +40,10 @@ fun ProductsListView(
         ) {
             items(
                 items = productsList,
-            ) {
-                ProductsListItem(
-                    productItem = it,
+            ) { item ->
+                ProductsListItemView(
+                    productItem = item,
+                    onClick = onItemClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
@@ -126,6 +128,7 @@ private fun PreviewProductsList() {
                     )
                 }
             } as ProductsListModel,
+            onItemClick = {}
         )
 
     }

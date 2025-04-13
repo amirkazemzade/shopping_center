@@ -3,6 +3,7 @@ package me.amirkzm.shoppingcenter.product.productitem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 /**
  * Screen's coordinator which is responsible for handling actions from the UI layer
@@ -12,10 +13,13 @@ class ProductItemCoordinator(
     val viewModel: ProductItemViewModel,
 ) {
     val screenStateFlow = viewModel.stateFlow
-    fun handle(action: ProductItemAction) {
+    fun handle(action: ProductItemAction, navigator: DestinationsNavigator) {
         when (action) {
-            ProductItemAction.OnClick -> { /* Handle action */
+            is ProductItemAction.FetchProduct -> {
+                viewModel.fetchProduct(id = action.id)
             }
+
+            ProductItemAction.NavigateBack -> navigator.navigateUp()
         }
     }
 

@@ -5,11 +5,13 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 
 @Destination<RootGraph>(start = true)
 @Composable
 fun ProductsListRoute(
+    navigator: DestinationsNavigator,
     coordinator: ProductsListCoordinator = rememberProductsListCoordinator(),
 ) {
     // State observing and declarations
@@ -17,7 +19,7 @@ fun ProductsListRoute(
 
     // UI Actions
     val actionsHandler: (ProductsListAction) -> Unit = { action ->
-        coordinator.handle(action)
+        coordinator.handle(action, navigator)
     }
 
     // UI Rendering

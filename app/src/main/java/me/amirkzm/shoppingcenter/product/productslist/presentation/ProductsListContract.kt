@@ -16,6 +16,6 @@ typealias ProductsListState = RequestState<ProductsListModel>
 
 sealed interface ProductsListAction {
     data object FetchProductsList : ProductsListAction
-    data object OnClick: ProductsListAction
+    data class OnProductItemClick(val productId: Int) : ProductsListAction
 }
 
