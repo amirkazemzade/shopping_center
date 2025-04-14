@@ -2,23 +2,22 @@ package me.amirkzm.shoppingcenter.product.productslist.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import me.amirkzm.shoppingcenter.product.common.domain.models.Category
@@ -40,13 +39,9 @@ fun ProductsListView(
     val effectiveItemSize = 200.dp
 
     val categoriesListState = rememberLazyListState()
-    val productsListState = rememberLazyGridState()
 
-    var isCategoriesListVisible by remember { mutableStateOf(true) }
-
-    LaunchedEffect(productsListState.lastScrolledForward) {
-        isCategoriesListVisible = !productsListState.lastScrolledForward
-    }
+    val scrollBehavior =
+        TopAppBarDefaults.enterAlwaysScrollBehavior(state = rememberTopAppBarState())
 
     LaunchedEffect(selectedCategory) {
         val indexOfSelectedCategory = categories.indexOfFirst { it == selectedCategory }
@@ -57,20 +52,23 @@ fun ProductsListView(
     Scaffold(
         topBar = {
             CategoriesFilterTopAppBar(
-                isCategoriesListVisible = isCategoriesListVisible,
                 categoriesListState = categoriesListState,
                 categories = categories,
                 selectedCategory = selectedCategory,
                 onDeselectCategory = onDeselectCategory,
-                onSelectCategory = onSelectCategory
+                onSelectCategory = onSelectCategory,
+                scrollBehavior = scrollBehavior
             )
-        }
+        },
+        modifier = modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
     ) {
         LazyVerticalGrid(
-            state = productsListState,
             columns = GridCells.Adaptive(effectiveItemSize),
             verticalArrangement = Arrangement.Center,
-            modifier = modifier.padding(it)
+            modifier = Modifier
+                .padding(it)
+                .fillMaxSize()
         ) {
             items(
                 items = productsList,
