@@ -25,5 +25,6 @@ sealed interface ProductsListAction {
     data object FetchCategories : ProductsListAction
     data class SelectCategory(val category: String) : ProductsListAction
     data object DeselectCategory : ProductsListAction
+    data object NavigateBack : ProductsListAction
 }
 

@@ -22,10 +22,22 @@ fun CategoriesFilterTopAppBar(
     selectedCategory: Category?,
     onDeselectCategory: () -> Unit,
     onSelectCategory: (Category) -> Unit,
+    onNavigateUp: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
     modifier: Modifier = Modifier,
+    showBackNavigation: Boolean = false,
 ) {
     TopAppBar(
+        navigationIcon = {
+            if (showBackNavigation) {
+                IconButton(onClick = { onNavigateUp() }) {
+                    Icon(
+                        painter = painterResource(R.drawable.round_arrow_back_24),
+                        contentDescription = "Navigate Back"
+                    )
+                }
+            }
+        },
         title = {
             CategoriesFilterRow(
                 listState = categoriesListState,

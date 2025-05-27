@@ -16,6 +16,7 @@ fun ProductsListScreen(
     categoriesState: CategoriesState,
     selectedCategoryState: SelectedCategoryState,
     onAction: (ProductsListAction) -> Unit,
+    showBackNavigation: Boolean = false,
 ) {
     Surface {
         LaunchedEffect(productsState) {
@@ -59,7 +60,9 @@ fun ProductsListScreen(
                     onAction(ProductsListAction.SelectCategory(category))
                 },
                 onDeselectCategory = { onAction(ProductsListAction.DeselectCategory) },
+                onNavigateUp = { onAction(ProductsListAction.NavigateBack) },
                 selectedCategory = selectedCategoryState,
+                showBackNavigation = showBackNavigation,
             )
         }
     }

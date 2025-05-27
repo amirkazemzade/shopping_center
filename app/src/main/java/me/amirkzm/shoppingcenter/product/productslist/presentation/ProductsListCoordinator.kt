@@ -31,6 +31,7 @@ class ProductsListCoordinator(
             is ProductsListAction.SelectCategory -> viewModel.selectCategory(action.category)
 
             ProductsListAction.DeselectCategory -> viewModel.deselectCategory()
+            ProductsListAction.NavigateBack -> navigator.navigateUp()
         }
     }
 }

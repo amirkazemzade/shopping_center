@@ -1,6 +1,5 @@
 package me.amirkzm.shoppingcenter.product.productslist.presentation.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,8 +32,10 @@ fun ProductsListView(
     onItemClick: (product: ProductItemModel) -> Unit,
     onSelectCategory: (category: Category) -> Unit,
     onDeselectCategory: () -> Unit,
+    onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
     selectedCategory: Category? = null,
+    showBackNavigation: Boolean = false,
 ) {
     val effectiveItemSize = 200.dp
 
@@ -57,7 +58,9 @@ fun ProductsListView(
                 selectedCategory = selectedCategory,
                 onDeselectCategory = onDeselectCategory,
                 onSelectCategory = onSelectCategory,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                onNavigateUp = onNavigateUp,
+                showBackNavigation = showBackNavigation,
             )
         },
         modifier = modifier
@@ -65,7 +68,6 @@ fun ProductsListView(
     ) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(effectiveItemSize),
-            verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .padding(it)
                 .fillMaxSize()
@@ -164,6 +166,7 @@ private fun PreviewProductsList() {
             onItemClick = {},
             onSelectCategory = {},
             onDeselectCategory = {},
+            onNavigateUp = {},
             categories = listOf(
                 "Category 1",
                 "Category 2",
