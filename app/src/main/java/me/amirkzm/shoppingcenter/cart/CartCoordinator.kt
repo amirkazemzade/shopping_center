@@ -14,8 +14,11 @@ class CartCoordinator(
     val screenStateFlow = viewModel.stateFlow
     fun handle(action: CartAction) {
         when (action) {
-            CartAction.OnClick -> { /* Handle action */
-            }
+            is CartAction.OnItemClick -> TODO()
+            is CartAction.OnIncreaseItemQuantity -> TODO()
+            is CartAction.OnDecreaseItemQuantity -> TODO()
+            is CartAction.OnRemoveItem -> TODO()
+            CartAction.OnCheckOut -> TODO()
         }
     }
 
