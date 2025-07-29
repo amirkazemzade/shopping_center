@@ -1,9 +1,8 @@
-package me.amirkzm.shoppingcenter.cart
+package me.amirkzm.shoppingcenter.cart.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph

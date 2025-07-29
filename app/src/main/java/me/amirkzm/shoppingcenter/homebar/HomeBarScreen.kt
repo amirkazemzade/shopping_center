@@ -15,7 +15,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import me.amirkzm.shoppingcenter.R
-import me.amirkzm.shoppingcenter.cart.CartRoute
+import me.amirkzm.shoppingcenter.cart.ui.CartRoute
 import me.amirkzm.shoppingcenter.product.productslist.presentation.ProductsListRoute
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

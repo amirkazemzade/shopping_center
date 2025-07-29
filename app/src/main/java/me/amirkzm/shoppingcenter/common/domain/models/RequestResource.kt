@@ -1,6 +1,10 @@
 package me.amirkzm.shoppingcenter.common.domain.models
 
-sealed interface RequestResource<out T> : RequestState<T>{
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+
+sealed interface RequestResource<out T> : RequestState<T> {
     data class Success<T>(val data: T) : RequestResource<T>
     data class Error(val error: RequestError) : RequestResource<Nothing>
 }
@@ -17,4 +21,27 @@ fun <A> RequestResource<A>.toStringWithNoSensitiveData(): String {
         is RequestResource.Error -> "Error: ${error.message}"
         is RequestResource.Success -> javaClass.simpleName
     }
+}
+
+suspend fun <T> toResourceCatching(
+    suspendCallback: suspend () -> T,
+    catch: (e: Exception) -> RequestError,
+): RequestResource<T> =
+    try {
+        val value = suspendCallback()
+        RequestResource.Success(value)
+    } catch (e: Exception) {
+        RequestResource.Error(catch(e))
+    }
+
+fun <T> Flow<T>.toResourceFlowCatching(
+    catch: (e: Throwable) -> RequestError,
+): Flow<RequestResource<T>> = flow {
+    this@toResourceFlowCatching
+        .catch { throwable ->
+            emit(
+                RequestResource.Error(catch(throwable))
+            )
+        }
+        .collect { data -> emit(RequestResource.Success(data)) }
 }

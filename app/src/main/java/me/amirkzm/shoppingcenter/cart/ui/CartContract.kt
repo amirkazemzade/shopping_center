@@ -1,4 +1,4 @@
-package me.amirkzm.shoppingcenter.cart
+package me.amirkzm.shoppingcenter.cart.ui
 
 import me.amirkzm.shoppingcenter.product.common.domain.models.ProductItemModel
 

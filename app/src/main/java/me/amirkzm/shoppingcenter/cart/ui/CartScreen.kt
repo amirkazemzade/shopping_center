@@ -1,4 +1,4 @@
-package me.amirkzm.shoppingcenter.cart
+package me.amirkzm.shoppingcenter.cart.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,8 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import me.amirkzm.shoppingcenter.cart.components.CartBottomBar
-import me.amirkzm.shoppingcenter.cart.components.CartItemsListView
+import me.amirkzm.shoppingcenter.cart.ui.components.CartBottomBar
+import me.amirkzm.shoppingcenter.cart.ui.components.CartItemsListView
 import me.amirkzm.shoppingcenter.common.presentation.theme.PreviewTheme
 import me.amirkzm.shoppingcenter.product.common.domain.models.ProductItemModel
 import me.amirkzm.shoppingcenter.product.common.domain.models.Rating

@@ -1,4 +1,4 @@
-package me.amirkzm.shoppingcenter.cart.components
+package me.amirkzm.shoppingcenter.cart.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import me.amirkzm.shoppingcenter.R
-import me.amirkzm.shoppingcenter.cart.CartItemState
+import me.amirkzm.shoppingcenter.cart.ui.CartItemState
 import me.amirkzm.shoppingcenter.common.presentation.theme.Widths
 
 @Composable

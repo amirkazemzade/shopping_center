@@ -1,4 +1,4 @@
-package me.amirkzm.shoppingcenter.cart
+package me.amirkzm.shoppingcenter.cart.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

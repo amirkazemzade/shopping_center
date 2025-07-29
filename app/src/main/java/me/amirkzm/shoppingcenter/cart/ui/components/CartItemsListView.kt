@@ -1,4 +1,4 @@
-package me.amirkzm.shoppingcenter.cart.components
+package me.amirkzm.shoppingcenter.cart.ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import me.amirkzm.shoppingcenter.cart.CartItemState
+import me.amirkzm.shoppingcenter.cart.ui.CartItemState
 import me.amirkzm.shoppingcenter.common.presentation.theme.PreviewTheme
 import me.amirkzm.shoppingcenter.product.common.domain.models.ProductItemModel
 import me.amirkzm.shoppingcenter.product.common.domain.models.Rating

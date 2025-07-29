@@ -1,4 +1,4 @@
-package me.amirkzm.shoppingcenter.cart.components
+package me.amirkzm.shoppingcenter.cart.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import me.amirkzm.shoppingcenter.cart.CartItemState
+import me.amirkzm.shoppingcenter.cart.ui.CartItemState
 import me.amirkzm.shoppingcenter.common.presentation.theme.Heights
 import me.amirkzm.shoppingcenter.common.presentation.theme.PreviewTheme
 import me.amirkzm.shoppingcenter.common.presentation.theme.Widths

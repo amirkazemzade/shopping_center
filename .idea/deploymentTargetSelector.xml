@@ -8,7 +8,16 @@
       <SelectionState runConfigName="PreviewProductsList">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="PreviewProductItemView - Dark">
+      <SelectionState runConfigName="CartUseCasesTest">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="cartUseCaseFlowTest()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="test03_addMultipleItemsToCart()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="test01_initialCartIsEmpty()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
