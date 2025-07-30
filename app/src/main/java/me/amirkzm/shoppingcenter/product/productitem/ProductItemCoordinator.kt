@@ -13,7 +13,13 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 class ProductItemCoordinator(
     val viewModel: ProductItemViewModel,
 ) {
-    val screenStateFlow = viewModel.stateFlow
+    val productStateFlow = viewModel.productStateFlow
+    val cartStateFlow = viewModel.cartStateFlow
+    val addToCartState = viewModel.addToCartState
+    val increaseQuantityState = viewModel.increaseQuantityState
+    val decreaseQuantityState = viewModel.decreaseQuantityState
+    val removeFromCartState = viewModel.removeFromCartState
+
     fun handle(action: ProductItemAction, navigator: DestinationsNavigator) {
         when (action) {
             is ProductItemAction.FetchProduct -> viewModel.fetchProduct(id = action.id)
@@ -21,7 +27,7 @@ class ProductItemCoordinator(
             ProductItemAction.NavigateBack -> navigator.navigateUp()
 
             is ProductItemAction.OnClickAddToCart -> {
-                // TODO: Add to cart
+                viewModel.addToCart(productId = action.id)
             }
 
             is ProductItemAction.OnClickCategory -> navigator.navigate(
@@ -29,6 +35,19 @@ class ProductItemCoordinator(
                     startingCategory = action.category,
                 )
             )
+
+            is ProductItemAction.OnIncreaseQuantityInCart -> viewModel.increaseQuantityInCart(
+                productId = action.id,
+            )
+
+            is ProductItemAction.OnDecreaseQuantityInCart -> viewModel.decreaseQuantityInCart(
+                productId = action.id,
+            )
+
+            is ProductItemAction.OnRemoveFromCart -> viewModel.removeFromCart(
+                productId = action.id,
+            )
+
         }
     }
 

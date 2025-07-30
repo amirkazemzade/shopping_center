@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material.icons)
     implementation(libs.hilt.android)
+    implementation(libs.compose.shimmer)
     androidTestImplementation(libs.hilt.android.testing)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)

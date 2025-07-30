@@ -15,7 +15,12 @@ fun ProductItemRoute(
     coordinator: ProductItemCoordinator = rememberProductItemCoordinator(),
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
+    val uiState by coordinator.productStateFlow.collectAsStateWithLifecycle()
+    val cartState by coordinator.cartStateFlow.collectAsStateWithLifecycle()
+    val addToCartState by coordinator.addToCartState.collectAsStateWithLifecycle()
+    val increaseQuantityState by coordinator.increaseQuantityState.collectAsStateWithLifecycle()
+    val decreaseQuantityState by coordinator.decreaseQuantityState.collectAsStateWithLifecycle()
+    val removeFromCartState by coordinator.removeFromCartState.collectAsStateWithLifecycle()
 
     // UI Actions
     val actionsHandler: (ProductItemAction) -> Unit = { action ->
@@ -26,6 +31,11 @@ fun ProductItemRoute(
     ProductItemScreen(
         productId = productId,
         state = uiState,
+        cartState = cartState,
+        addCartState = addToCartState,
+        increaseQuantityState = increaseQuantityState,
+        decreaseQuantityState = decreaseQuantityState,
+        removeFromCartState = removeFromCartState,
         onAction = actionsHandler
     )
 }

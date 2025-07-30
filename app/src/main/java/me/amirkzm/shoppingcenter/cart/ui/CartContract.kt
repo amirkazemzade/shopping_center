@@ -1,22 +1,25 @@
 package me.amirkzm.shoppingcenter.cart.ui
 
-import me.amirkzm.shoppingcenter.product.common.domain.models.ProductItemModel
+import me.amirkzm.shoppingcenter.cart.domain.models.CartItemWithProductModel
+import me.amirkzm.shoppingcenter.common.domain.models.RequestState
+import me.amirkzm.shoppingcenter.common.domain.models.isSuccess
+import me.amirkzm.shoppingcenter.common.domain.models.successDataOrThrow
+import java.util.Locale
 
 
-/**
- * UI State that represents CartScreen
- **/
-data class CartItemState(
-    val productItemModel: ProductItemModel,
-    val quantity: Int = 1,
-) {
-    val totalPrice: Double
-        get() = productItemModel.price * quantity
-}
+val RequestState<List<CartItemWithProductModel>>.isFullyLoaded: Boolean
+    get() = this.isSuccess && this.successDataOrThrow.all { it.product != null }
 
-data class CartState(
-    val items: List<CartItemState> = emptyList(),
-)
+val RequestState<List<CartItemWithProductModel>>.cartSumPrice: Double?
+    get() {
+        if (!this.isFullyLoaded) return null
+        return this.successDataOrThrow.sumOf { it.totalPrice!! }
+    }
+
+fun RequestState<List<CartItemWithProductModel>>.cartSumPriceFormatted(locale: Locale): String? =
+    cartSumPrice?.let {
+        return String.format(locale = locale, "%.2f", it)
+    }
 
 /**
  * Cart Actions emitted from the UI Layer
@@ -29,5 +32,6 @@ sealed interface CartAction {
     data class OnDecreaseItemQuantity(val id: Int) : CartAction
     data class OnRemoveItem(val id: Int) : CartAction
     data object OnCheckOut : CartAction
+    data object OnRefresh : CartAction
 }
 

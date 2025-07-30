@@ -16,29 +16,35 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import me.amirkzm.shoppingcenter.R
-import me.amirkzm.shoppingcenter.cart.ui.CartItemState
-import me.amirkzm.shoppingcenter.common.presentation.theme.Widths
+import me.amirkzm.shoppingcenter.cart.domain.models.CartItemWithProductModel
+import me.amirkzm.shoppingcenter.common.presentation.theme.Heights
 
 @Composable
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 fun CartItemActionsUI(
-    cartItem: CartItemState,
-    modifier: Modifier = Modifier,
+    cartItem: CartItemWithProductModel,
     onIncreaseQuantity: (id: Int) -> Unit,
     onDecreaseQuantity: (id: Int) -> Unit,
     onRemoveItem: (id: Int) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
+    val enabled = cartItem.product != null
+
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer
         ),
         modifier = modifier
+            .shimmer(enabled = !enabled)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             IconButton(
-                onClick = { onIncreaseQuantity(cartItem.productItemModel.id) },
+                enabled = enabled,
+                onClick = {
+                    onIncreaseQuantity(cartItem.product!!.id)
+                },
                 colors = IconButtonDefaults.filledTonalIconButtonColors(),
                 shape = IconButtonDefaults.extraSmallSquareShape,
             ) {
@@ -46,16 +52,16 @@ fun CartItemActionsUI(
                     painter = painterResource(R.drawable.round_add_24),
                     contentDescription = "Increase Quantity",
                 )
-
             }
 
-            Widths.Smallest()
+            Heights.Smallest()
             Text(text = cartItem.quantity.toString())
-            Widths.Smallest()
+            Heights.Smallest()
             IconButton(
+                enabled = enabled,
                 onClick = {
-                    if (cartItem.quantity == 1) onRemoveItem(cartItem.productItemModel.id)
-                    else onDecreaseQuantity(cartItem.productItemModel.id)
+                    if (cartItem.quantity == 1) onRemoveItem(cartItem.product!!.id)
+                    else onDecreaseQuantity(cartItem.product!!.id)
                 },
                 shape = IconButtonDefaults.extraSmallSquareShape,
                 colors = IconButtonDefaults.filledTonalIconButtonColors(containerColor = MaterialTheme.colorScheme.errorContainer),

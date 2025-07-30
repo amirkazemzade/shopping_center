@@ -18,6 +18,9 @@ sealed interface ProductItemAction {
     data class FetchProduct(val id: Int) : ProductItemAction
     data object NavigateBack : ProductItemAction
     data class OnClickCategory(val category: String) : ProductItemAction
-    data class OnClickAddToCart(val product: ProductItemModel) : ProductItemAction
+    data class OnClickAddToCart(val id: Int) : ProductItemAction
+    data class OnIncreaseQuantityInCart(val id: Int) : ProductItemAction
+    data class OnDecreaseQuantityInCart(val id: Int) : ProductItemAction
+    data class OnRemoveFromCart(val id: Int) : ProductItemAction
 }
 

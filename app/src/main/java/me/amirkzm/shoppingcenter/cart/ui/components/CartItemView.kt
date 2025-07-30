@@ -16,7 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import me.amirkzm.shoppingcenter.cart.ui.CartItemState
+import com.valentinilk.shimmer.shimmer
+import me.amirkzm.shoppingcenter.cart.domain.models.CartItemWithProductModel
 import me.amirkzm.shoppingcenter.common.presentation.theme.Heights
 import me.amirkzm.shoppingcenter.common.presentation.theme.PreviewTheme
 import me.amirkzm.shoppingcenter.common.presentation.theme.Widths
@@ -27,7 +28,7 @@ import me.amirkzm.shoppingcenter.product.common.presentation.components.ProductI
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun CartItemView(
-    cartItem: CartItemState,
+    cartItem: CartItemWithProductModel,
     modifier: Modifier = Modifier,
     onDecreaseQuantity: (id: Int) -> Unit = {},
     onIncreaseQuantity: (id: Int) -> Unit = {},
@@ -35,28 +36,44 @@ fun CartItemView(
     onItemClick: (id: Int) -> Unit = {},
 ) {
     Card(
-        onClick = { onItemClick(cartItem.productItemModel.id) },
+        onClick = {
+            if (cartItem.product == null) return@Card
+            onItemClick(cartItem.product.id)
+        },
         modifier = modifier
     ) {
+        val isProductLoading = cartItem.product == null
         Row(
             verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(4.dp)
         ) {
             Card {
                 ProductImage(
-                    cartItem.productItemModel, modifier = Modifier.size(120.dp)
+                    cartItem.product,
+                    modifier = Modifier
+                        .size(120.dp)
+                        .shimmer(enabled = isProductLoading)
                 )
             }
             Widths.ExtraSmall()
             Column(
                 modifier = Modifier.weight(1f)
             ) {
-                Text(text = cartItem.productItemModel.title)
-                Heights.ExtraLarge()
                 Text(
-                    text = "${cartItem.totalPrice}$",
+                    text = cartItem.product?.title ?: "Product is loading",
+                    modifier = Modifier
+                        .shimmer(enabled = isProductLoading)
+                )
+                Heights.ExtraLarge()
+                val priceFormat =
+                    if (cartItem.totalPrice != null) "%.2f".format(cartItem.totalPrice)
+                    else "--.--"
+                Text(
+                    text = "$priceFormat$",
                     style = MaterialTheme.typography.titleLargeEmphasized.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.End,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .shimmer(enabled = isProductLoading)
                 )
             }
             Widths.ExtraSmall()
@@ -70,13 +87,32 @@ fun CartItemView(
     }
 }
 
+
+@Composable
+fun Modifier.shimmer(
+    enabled: Boolean,
+): Modifier = if (enabled) then(this.shimmer()) else this
+
+@PreviewLightDark
+@Composable
+private fun CartItemEmptyViewPreview() {
+    PreviewTheme {
+        CartItemView(
+            cartItem = CartItemWithProductModel(
+                product = null,
+                quantity = 1,
+            )
+        )
+    }
+}
+
 @PreviewLightDark
 @Composable
 private fun CartItemViewPreview() {
     PreviewTheme {
         CartItemView(
-            cartItem = CartItemState(
-                productItemModel = ProductItemModel(
+            cartItem = CartItemWithProductModel(
+                product = ProductItemModel(
                     id = 1,
                     title = "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
                     price = 109.95,
@@ -98,8 +134,8 @@ private fun CartItemViewPreview() {
 private fun CartItemViewHighQuantityPreview() {
     PreviewTheme {
         CartItemView(
-            cartItem = CartItemState(
-                productItemModel = ProductItemModel(
+            cartItem = CartItemWithProductModel(
+                product = ProductItemModel(
                     id = 1,
                     title = "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
                     price = 109.95,

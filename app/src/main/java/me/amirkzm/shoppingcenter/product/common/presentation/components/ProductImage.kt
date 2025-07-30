@@ -18,7 +18,7 @@ import me.amirkzm.shoppingcenter.product.common.domain.models.ProductItemModel
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ProductImage(
-    product: ProductItemModel,
+    product: ProductItemModel?,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -29,8 +29,8 @@ fun ProductImage(
             .padding(4.dp)
     ) {
         GlideImage(
-            model = product.image,
-            contentDescription = product.description,
+            model = product?.image,
+            contentDescription = product?.description,
             // Note: Do Not use `painterResource(R.drawable.ID)` as it might cause scrolling
             // crash when combining lazy column with glide.
             loading = placeholder(resourceId = R.drawable.shopping_basket),

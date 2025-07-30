@@ -1,5 +1,7 @@
 package me.amirkzm.shoppingcenter.product.productslist.presentation
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -14,6 +16,7 @@ fun ProductsListRoute(
     navigator: DestinationsNavigator,
     startingCategory: String? = null,
     coordinator: ProductsListCoordinator = rememberProductsListCoordinator(startingSelectedCategory = startingCategory),
+    contentWindowInsets: WindowInsets = WindowInsets.systemBars,
 ) {
     val showBackNavigation = navigator.getBackStackEntry(ProductsListDestination) != null
 
@@ -34,6 +37,7 @@ fun ProductsListRoute(
         selectedCategoryState = selectedCategoryState,
         onAction = actionsHandler,
         showBackNavigation = showBackNavigation,
+        contentWindowInsets = contentWindowInsets,
     )
 }
 

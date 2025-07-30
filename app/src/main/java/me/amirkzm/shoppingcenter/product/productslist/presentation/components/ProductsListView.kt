@@ -1,9 +1,12 @@
 package me.amirkzm.shoppingcenter.product.productslist.presentation.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -24,6 +27,7 @@ import me.amirkzm.shoppingcenter.product.common.domain.models.ProductItemModel
 import me.amirkzm.shoppingcenter.product.common.domain.models.ProductsListModel
 import me.amirkzm.shoppingcenter.product.common.domain.models.Rating
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun ProductsListView(
@@ -36,6 +40,7 @@ fun ProductsListView(
     modifier: Modifier = Modifier,
     selectedCategory: Category? = null,
     showBackNavigation: Boolean = false,
+    contentWindowInsets: WindowInsets = WindowInsets.systemBars,
 ) {
     val effectiveItemSize = 200.dp
 
@@ -63,6 +68,7 @@ fun ProductsListView(
                 showBackNavigation = showBackNavigation,
             )
         },
+        contentWindowInsets = contentWindowInsets,
         modifier = modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection)
     ) {

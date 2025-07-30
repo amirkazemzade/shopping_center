@@ -1,6 +1,8 @@
 package me.amirkzm.shoppingcenter.product.productslist.presentation
 
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import me.amirkzm.shoppingcenter.common.domain.models.RequestResource
@@ -17,8 +19,9 @@ fun ProductsListScreen(
     selectedCategoryState: SelectedCategoryState,
     onAction: (ProductsListAction) -> Unit,
     showBackNavigation: Boolean = false,
+    contentWindowInsets: WindowInsets = WindowInsets.systemBars,
 ) {
-    Surface {
+    Box {
         LaunchedEffect(productsState) {
             if (productsState is RequestState.Idle) {
                 onAction(ProductsListAction.FetchProductsList)
@@ -63,6 +66,7 @@ fun ProductsListScreen(
                 onNavigateUp = { onAction(ProductsListAction.NavigateBack) },
                 selectedCategory = selectedCategoryState,
                 showBackNavigation = showBackNavigation,
+                contentWindowInsets = contentWindowInsets,
             )
         }
     }
