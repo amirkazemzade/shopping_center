@@ -1,13 +1,15 @@
 # 🛍️ Shopping Center App
 
-A feature-rich Android application that provides users with a seamless and enjoyable shopping experience.
+A prototype of a shopping center
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/travis/com/amirkazemzade/shopping_center.svg?branch=main)](https://travis-ci.com/amirkazemzade/shopping_center)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
 ## 📖 About The Project
 
-[**TODO:** Write a more detailed description of your project here. Explain the purpose of the application and the problem it solves. For example, "This app allows users to browse a wide variety of products, add them to a cart, and complete a secure checkout process. The primary goal is to provide a user-friendly mobile commerce platform..."]
+This project is a prototype for an E-commerce Android application. It showcases basic features using sample data and is built following the latest Material Design 3 guidelines for a clean and modern user interface.
+
 
 ---
 
@@ -16,7 +18,6 @@ A feature-rich Android application that provides users with a seamless and enjoy
 * **Product Catalog:** Browse products by category, search, and filter.
 * **Product Details:** View detailed information, images, and reviews for each product.
 * **Shopping Cart:** Add, remove, and update product quantities in the cart.
-* **[TODO]:** Add or remove features based on your application's functionality.
 
 ## :bulb: TODO
 * **User Authentication:** Secure sign-up and login functionality.
@@ -40,14 +41,15 @@ A feature-rich Android application that provides users with a seamless and enjoy
 This project is built using the following technologies and architectural patterns:
 
 * **[Kotlin](https://kotlinlang.org/)** as the primary programming language.
-* **[MVVM (Model-View-ViewModel)](https://developer.android.com/jetpack/guide)** as the architectural pattern.
+* **[Clean Architecture](https://developer.android.com/topic/architecture)** as the architectural pattern.
 * **[Jetpack Compose](https://developer.android.com/jetpack/compose)** for building the user interface.
 * **[Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)** for asynchronous programming.
 * **[Retrofit](https://square.github.io/retrofit/)** for networking and consuming RESTful APIs.
 * **[Room](https://developer.android.com/training/data-storage/room)** for local database storage.
 * **[Dagger Hilt](https://dagger.dev/hilt/)** for dependency injection.
-* **[Coil](https://coil-kt.github.io/coil/)** for image loading.
-* **[TODO]:** Update this list with the specific technologies you've used in your project.
+* **[Glide](https://github.com/bumptech/glide)** for image loading.
+* **[Valentinilk Compose Shimmer](https://github.com/valentinilk/compose-shimmer)** for showing shimmer effect for loading objects.
+* **[Raamcosta Compose Destinations](https://github.com/raamcosta/compose-destinations)** for type-safe Jetpack Compose navigation
 
 ---
 
@@ -67,13 +69,7 @@ To get a local copy up and running, please follow these simple steps.
     git clone [https://github.com/amirkazemzade/shopping_center.git](https://github.com/amirkazemzade/shopping_center.git)
     ```
 2.  Open the project in Android Studio.
-3.  [**TODO:** Add any other necessary setup steps. For example, if you need an API key, explain where to get it and how to add it to the project.]
-
----
-
-## 🚀 Usage
-
-[**TODO:** Provide instructions on how to use your application. You can include code examples or GIFs to demonstrate the app's functionality.]
+3.  Build and run the app
 
 ---
 
@@ -91,11 +87,11 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 ---
 
-## 📜 License
+<!-- ## 📜 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
----
+--- -->
 
 ## 📬 Contact
 
