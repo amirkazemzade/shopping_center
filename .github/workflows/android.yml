@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: set up JDK 11
+    - name: set up JDK 21
       uses: actions/setup-java@v4
       with:
-        java-version: '11'
+        java-version: '21'
         distribution: 'temurin'
         cache: gradle
 
@@ -32,6 +32,7 @@ jobs:
         keystore_password: ${{ secrets.keystore_password }}
         key_alias: ${{ secrets.key_alias }}
         key_password: ${{ secrets.key_password }}
+        java_version: 21
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.6.2
