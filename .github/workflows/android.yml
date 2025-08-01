@@ -43,6 +43,9 @@ jobs:
         name: shopping_center_release.apk
         path: app/build/outputs/apk/release/app-release.apk
 
+    - name: Run Tests on an Android emulator
+      uses: vgaidarji/android-github-actions-emulator@v1.0.1          
+
     - name: Release
       uses: softprops/action-gh-release@v2
       if: github.ref_type == 'tag'
