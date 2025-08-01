@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -9,12 +11,12 @@ plugins {
 
 android {
     namespace = "me.amirkzm.shoppingcenter"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "me.amirkzm.shoppingcenter"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -35,7 +37,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "11"
+
     }
     buildFeatures {
         compose = true
@@ -45,6 +47,7 @@ android {
 kotlin {
     compilerOptions {
         freeCompilerArgs.add("-Xwhen-guards")
+        jvmTarget.set(JvmTarget.JVM_11)
     }
 }
 

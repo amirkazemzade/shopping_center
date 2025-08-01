@@ -19,8 +19,8 @@ import me.amirkzm.shoppingcenter.R
 import me.amirkzm.shoppingcenter.cart.domain.models.CartItemWithProductModel
 import me.amirkzm.shoppingcenter.common.presentation.theme.Heights
 
-@Composable
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
 fun CartItemActionsUI(
     cartItem: CartItemWithProductModel,
     onIncreaseQuantity: (id: Int) -> Unit,

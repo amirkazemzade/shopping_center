@@ -18,7 +18,7 @@ fun OutlinedButtonWithIcon(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     colors: ButtonColors = ButtonDefaults.outlinedButtonColors(),
-    border: BorderStroke? = ButtonDefaults.outlinedButtonBorder,
+    border: BorderStroke? = ButtonDefaults.outlinedButtonBorder(),
     content: @Composable () -> Unit,
 ) {
     OutlinedButton(
