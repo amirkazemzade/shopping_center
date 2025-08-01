@@ -2,7 +2,7 @@
 
 A prototype of a shopping center
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<!-- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) -->
 [![Build Status](https://img.shields.io/travis/com/amirkazemzade/shopping_center.svg?branch=main)](https://travis-ci.com/amirkazemzade/shopping_center)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
@@ -28,11 +28,9 @@ This project is a prototype for an E-commerce Android application. It showcases 
 
 ## 📸 Screenshots
 
-[**TODO:** Add screenshots of your application. This is one of the most important parts of a README for a mobile application. You can add images to your repository and link them here.]
-
-| **Login Screen** | **Product Catalog** | **Shopping Cart** |
+| **Product Catalog** | **Product Detail** | **Shopping Cart** | 
 | :----------: | :----------: | :----------: |
-| ![Login Screen](URL_TO_LOGIN_SCREENSHOT) | ![Product Catalog](URL_TO_PRODUCT_CATALOG_SCREENSHOT) | ![Shopping Cart](URL_TO_SHOPPING_CART_SCREENSHOT) |
+|![Product Catalog](pictures/home_screen.png) | ![Product Detail](pictures/product_screen.png) | ![Shopping Cart](pictures/cart_screen.png) |  
 
 ---
 
@@ -100,13 +98,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Project Link: [https://github.com/amirkazemzade/shopping_center](https://github.com/amirkazemzade/shopping_center)
 
 ---
-
-## ✅ TODO
-
--   [ ] Write a detailed project description.
--   [ ] Add screenshots of the application.
--   [ ] Update the "Features" and "Technologies Used" sections to accurately reflect the project.
--   [ ] Add any necessary setup instructions to the "Installation" section (e.g., API keys).
--   [ ] Provide detailed usage instructions or examples.
--   [ ] Add a `LICENSE` file to your repository.
--   [ ] Update your contact information.
