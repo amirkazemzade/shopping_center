@@ -3,7 +3,7 @@
 A prototype of a shopping center
 
 <!-- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) -->
-[![Build Status](https://img.shields.io/travis/com/amirkazemzade/shopping_center.svg?branch=main)](https://travis-ci.com/amirkazemzade/shopping_center)
+![Build Status](https://github.com/amirkazemzade/shopping_center/actions/workflows/android.yml/badge.svg?branch=master)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
 ## 📖 About The Project
